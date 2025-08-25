@@ -57,6 +57,25 @@ app.delete("/usuarios/:id", async (req,res) => {
     }
 })
 
+app.put("/usuarios/:id", async (req,res) => {
+    try {
+        let {id} = req.params
+        let { nome, email, senha, telefone }  = req.body
+        console.log(nome, email, senha, telefone);
+        
+        let [results] = await db.query('UPDATE usuarios SET nome = ?, email = ?, senha =? ,telefone =? WHERE id = ?',[nome, email, senha, telefone,id])
+        if(results.affectedRows === "0") {
+            res.status(404).send("Usuario não encontrado")
+        }
+        res.status(200).send("Usuario atualizado com sucesso")
+    } catch (error) {
+        res.status(500).send("Internal Server Error")
+    }
+})
+
+
+
+
 app.listen(PORT, () => {
     console.log(`Aplicação rodando na porta ${PORT}`)
 })
