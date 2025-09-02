@@ -1,10 +1,10 @@
-import * as usuarioService from "../services/usuarioService.js"
+import * as categoriaService from "../services/categoriaService.js"
 
 
 export const index = async(req,res) => {
     try {
-        const usuarios = await usuarioService.index()
-        res.status(200).send(usuarios)
+        const categoria = await categoriaService.index()
+        res.status(200).send(categoria)
     } catch (error) {
             res.status(500).send(error)
     }
@@ -13,9 +13,9 @@ export const index = async(req,res) => {
 export const find = async(req,res) => {
     try {
         let {id} = req.params
-        const usuarios = await usuarioService.find(id)
+        const categoria = await categoriaService.find(id)
         
-        res.status(200).send(usuarios)
+        res.status(200).send(categoria)
     } catch (error) {
             res.status(500).send(error)
     }
@@ -24,9 +24,9 @@ export const find = async(req,res) => {
 export const destroy = async(req,res) => {
     try {
         let {id} = req.params
-        const usuarios = await usuarioService.destroy(id)
+        const categoria = await categoriaService.destroy(id)
         
-        res.status(200).send(usuarios)
+        res.status(200).send(categoria)
     } catch (error) {
             res.status(500).send(error)
     }
@@ -34,7 +34,7 @@ export const destroy = async(req,res) => {
 export const create = async(req,res) => {
     try {
         let {nome,email,senha,telefone} = req.body
-        const usuarios = await usuarioService.create(nome,email,senha,telefone)
+        const categoria = await categoriaService.create(nome,email,senha,telefone)
         
         res.status(200).send("Usuário cadastrado com sucesso")
     } catch (error) {
@@ -46,7 +46,7 @@ export const update = async(req,res) => {
     try {
         let {nome,email,senha,telefone} = req.body
         let {id} = req.params
-        const usuarios = await usuarioService.update(nome,email,senha,telefone,id)
+        const categoria = await categoriaService.update(nome,email,senha,telefone,id)
         
         res.status(200).send("Usuário atualizado com sucesso")
     } catch (error) {
