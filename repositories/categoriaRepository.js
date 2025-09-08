@@ -32,7 +32,7 @@ export const destroy = async(id) => {
     return results
 }
 
-export const update = async(nome,id) => {
+export const update = async(id,nome) => {
     let results = await prisma.categoria.update(
         {
             where: {id:Number(id)},
