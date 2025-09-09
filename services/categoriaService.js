@@ -14,9 +14,9 @@ export const destroy = async(id) => {
 }
 
 export const create = async(nome,email,senha,telefone) => {
-    return await categoriaRepository.create(nome,email,senha,telefone)
+    return await categoriaRepository.create(nome)
 }
 
-export const update = async(nome,email,senha,telefone,id) => {
-    return await categoriaRepository.update(nome,email,senha,telefone,id)
+export const update = async(id,nome) => {
+    return await categoriaRepository.update(nome,id)
 }
