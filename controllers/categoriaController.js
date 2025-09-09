@@ -33,10 +33,10 @@ export const destroy = async(req,res) => {
 }
 export const create = async(req,res) => {
     try {
-        let {nome,email,senha,telefone} = req.body
-        const categoria = await categoriaService.create(nome,email,senha,telefone)
+        let {nome} = req.body
+        const categoria = await categoriaService.create(nome)
         
-        res.status(200).send("Usuário cadastrado com sucesso")
+        res.status(200).send("Categoria cadastrada com sucesso")
     } catch (error) {
             res.status(500).send(error)
     }
@@ -44,11 +44,11 @@ export const create = async(req,res) => {
 
 export const update = async(req,res) => {
     try {
-        let {nome,email,senha,telefone} = req.body
+        let {nome} = req.body
         let {id} = req.params
-        const categoria = await categoriaService.update(nome,email,senha,telefone,id)
+        const categoria = await categoriaService.update(id,nome)
         
-        res.status(200).send("Usuário atualizado com sucesso")
+        res.status(200).send("Categoria atualizada com sucesso")
     } catch (error) {
             res.status(500).send(error)
     }
