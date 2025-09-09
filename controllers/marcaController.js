@@ -1,10 +1,12 @@
-import * as categoriaService from "../services/categoriaService.js"
+import * as marcaService from "../services/marcaService.js"
 
 
 export const index = async(req,res) => {
     try {
-        const categoria = await categoriaService.index()
-        res.status(200).send(categoria)
+        const marca = await marcaService.index()
+        console.log();
+        
+        res.status(200).send(marca)
     } catch (error) {
             res.status(500).send(error)
     }
@@ -13,9 +15,9 @@ export const index = async(req,res) => {
 export const find = async(req,res) => {
     try {
         let {id} = req.params
-        const categoria = await categoriaService.find(id)
+        const marca = await marcaService.find(id)
         
-        res.status(200).send(categoria)
+        res.status(200).send(marca)
     } catch (error) {
             res.status(500).send(error)
     }
@@ -24,17 +26,17 @@ export const find = async(req,res) => {
 export const destroy = async(req,res) => {
     try {
         let {id} = req.params
-        const categoria = await categoriaService.destroy(id)
+        const marca = await marcaService.destroy(id)
         
-        res.status(200).send(categoria)
+        res.status(200).send(marca)
     } catch (error) {
             res.status(500).send(error)
     }
 }
 export const create = async(req,res) => {
     try {
-        let {nome,email,senha,telefone} = req.body
-        const categoria = await categoriaService.create(nome,email,senha,telefone)
+        let {id,nome} = req.body
+        const marca = await marcaService.create(id,nome)
         
         res.status(200).send("Usuário cadastrado com sucesso")
     } catch (error) {
@@ -46,7 +48,7 @@ export const update = async(req,res) => {
     try {
         let {nome} = req.body
         let {id} = req.params
-        const categoria = await categoriaService.update(id,nome)
+        const marca = await marcaService.update(id,nome)
         
         res.status(200).send("Usuário atualizado com sucesso")
     } catch (error) {
