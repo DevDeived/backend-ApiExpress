@@ -13,3 +13,30 @@ model Categoria {
   createdAt   DateTime      @default(now())
   updatedAt   DateTime      @default(now())
 }
+
+model Usuarios {
+  id          Int           @id @default(autoincrement())
+  nome        String        @db.VarChar(255)
+  cpf         String        @db.VarChar(255)
+  genero      String        @db.VarChar(2)
+  email       String        @db.VarChar(50)
+  celular     String        @db.VarChar(50)
+  senha       String        @db.VarChar(255)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @default(now())
+  endereco_de_entrega       End_de_entrega[]
+  }
+
+model End_de_entrega {
+  id          Int           @id @default(autoincrement())
+  estado      String        @db.VarChar(255)
+  cidade      String        @db.VarChar(255)
+  rua         String        @db.VarChar(255)
+  cep         String        @db.VarChar(255)
+  numero      String        @db.VarChar(255)
+  complemento String        @db.VarChar(255)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @default(now())
+  usuarios_id Int
+  usuario    Usuarios   @relation(fields: [usuarios_id], references: [id])
+}
