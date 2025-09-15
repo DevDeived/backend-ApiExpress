@@ -46,6 +46,7 @@ export const update = async(req,res) => {
     try {
         let {id} = req.params
         let {nome} = req.body
+
         const categoria = await categoriaService.update(id,nome)
         
         res.status(200).send("Usuário atualizado com sucesso")
