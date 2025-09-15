@@ -11,5 +11,64 @@ model Categoria {
   id          Int           @id @default(autoincrement())
   nome        String        @db.VarChar(255)
   createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  produtos  Produto[]
+
+}
+
+model Estado {
+  id          Int           @id @default(autoincrement())
+  nome        String        @db.VarChar(255)
+  produtos  Produto[]
+}
+
+model Marca {
+  id          Int           @id @default(autoincrement())
+  nome        String        @db.VarChar(255)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  produtos  Produto[]
+}
+
+model Promocao {
+  id          Int           @id @default(autoincrement())
+  nome        String        @db.VarChar(255)
+  inicio      DateTime      @default(now())
+  termino     DateTime      
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  produtos  Produto[]
+}
+
+model Produto {
+  id          Int       @id @default(autoincrement())
+  nome        String    @db.VarChar(255)
+  descricao   String    @db.VarChar(255)
+  avaliacao   Decimal   @db.Decimal(10,2)
+  tamanho     String    @db.VarChar(20)
+  cor         String    @db.VarChar(20)
+  preco       Decimal   @db.Decimal(10,2)
+  genero      String    @db.VarChar(2)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  categoria_id Int
+  categoria   Categoria @relation(fields: [categoria_id], references: [id])
+  estado_id   Int
+  estado      Estado    @relation(fields: [estado_id], references: [id])
+
+  marca_id    Int
+  marca       Marca     @relation(fields: [marca_id], references: [id])
+
+  promocao_id  Int
+  promocao    Promocao  @relation(fields: [promocao_id], references: [id])
+  estoques     Estoque[]
+}
+
+model Estoque {
+  id          Int           @id @default(autoincrement())
+  produto_id  Int           
+  produto     Produto       @relation(fields:[produto_id], references:[id])
+  quantidade  Int           
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
 }
