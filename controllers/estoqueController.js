@@ -1,10 +1,10 @@
-import * as categoriaService from "../services/categoriaService.js"
+import * as estoqueService from "../services/estoqueService.js"
 
 
 export const index = async(req,res) => {
     try {
-        const categoria = await categoriaService.index()
-        res.status(200).send(categoria)
+        const estoque = await estoqueService.index()
+        res.status(200).send(estoque)
     } catch (error) {
             res.status(500).send(error)
     }
@@ -13,9 +13,9 @@ export const index = async(req,res) => {
 export const find = async(req,res) => {
     try {
         let {id} = req.params
-        const categoria = await categoriaService.find(id)
+        const estoque = await estoqueService.find(id)
         
-        res.status(200).send(categoria)
+        res.status(200).send(estoque)
     } catch (error) {
             res.status(500).send(error)
     }
@@ -24,19 +24,19 @@ export const find = async(req,res) => {
 export const destroy = async(req,res) => {
     try {
         let {id} = req.params
-        const categoria = await categoriaService.destroy(id)
+        const estoque = await estoqueService.destroy(id)
         
-        res.status(200).send(categoria)
+        res.status(200).send(estoque)
     } catch (error) {
             res.status(500).send(error)
     }
 }
 export const create = async(req,res) => {
     try {
-        let {nome} = req.body
-        const categoria = await categoriaService.create(nome)
+        let {produto_id, quantidade} = req.body
+        const estoque = await estoqueService.create(produto_id, quantidade)
         
-        res.status(200).send("Categoria cadastrada com sucesso")
+        res.status(200).send("Estoque cadastrado com sucesso")
     } catch (error) {
             res.status(500).send(error)
     }
@@ -44,12 +44,11 @@ export const create = async(req,res) => {
 
 export const update = async(req,res) => {
     try {
-        let {nome} = req.body
         let {id} = req.params
-
-        const categoria = await categoriaService.update(id,nome)
+        let {produto_id, quantidade} = req.body
+        const estoque = await estoqueService.update(id,produto_id, quantidade)
         
-        res.status(200).send("Categoria atualizada com sucesso")
+        res.status(200).send("Estoque atualizado com sucesso")
     } catch (error) {
             res.status(500).send(error)
     }
