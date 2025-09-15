@@ -1,14 +1,16 @@
-import express from "express"
+import express from "express";
 import bodyParser from "body-parser";
-import categoriaRoute from "./routes/categoriaRoute.js"
+import categoriaRoute from "./routes/categoriaRoute.js";
+import pedidosRoute from "./routes/pedidosRoute.js";
 
-const app = express()
-const PORT = 3000
+const app = express();
+const PORT = 3000;
 
 app.use(bodyParser.json());
 
-app.use("/api",categoriaRoute)
+app.use("/api", categoriaRoute);
+app.use("/api", pedidosRoute);
 
 app.listen(PORT, () => {
-    console.log(`Aplicação rodando na porta ${PORT}`)
-})
+  console.log(`Aplicação rodando na porta ${PORT}`);
+});

@@ -7,9 +7,38 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Categoria {
+model Pedido {
+  id                  Int       @id @default(autoincrement())
+  cod_rastreio        String?   
+  data_compra         DateTime
+  data_entrega        DateTime?
+  forma_de_pagamento  forma_de_pagamento @relation(fields: [forma_de_pagamento_id], references: [id])
+  forma_de_pagamento_id Int
+  status              Status    @relation(fields: [status_id], references: [id])
+  status_id           Int
+  transportadora      Transportadora @relation(fields: [transportadora_id], references: [id])
+  transportadora_id   Int
+}
+
+model forma_de_pagamento {
   id          Int           @id @default(autoincrement())
   nome        String        @db.VarChar(255)
   createdAt   DateTime      @default(now())
   updatedAt   DateTime      @default(now())
+  pedido      Pedido[]
+}
+
+model Transportadora {
+  id        Int      @id @default(autoincrement())
+  nome      String   @db.VarChar(255)
+  cnpj      String   @db.VarChar(14) 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  pedido    Pedido[]
+}
+
+model Status {
+  id      Int      @id @default(autoincrement())
+  nome    String
+  pedido  Pedido[]
 }
