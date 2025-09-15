@@ -19,4 +19,5 @@ export const create = async(nome) => {
 
 export const update = async(id, nome) => {
     return await categoriaRepository.update(id, nome)
+
 }

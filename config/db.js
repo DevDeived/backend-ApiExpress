@@ -5,7 +5,7 @@ const db = mysql.createPool({
     host:"localhost",
     database:"dripstore",
     password:"1234",
-    port:"3306"
+    port:"3307"
 })
 
 export default db
