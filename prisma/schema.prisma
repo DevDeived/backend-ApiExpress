@@ -15,6 +15,13 @@ model Categoria {
   updatedAt   DateTime      @default(now())
 }
 
+model Marca {
+  id          Int           @id @default(autoincrement())
+  nome        String        @db.VarChar(255)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @default(now())
+}
+
 model promocao {
   id          Int           @id @default(autoincrement())
   nome        String        @db.VarChar(255)
