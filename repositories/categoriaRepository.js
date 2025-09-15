@@ -1,9 +1,11 @@
 import prisma from "../config/prisma.js"
 
+
 export const index = async() => {
     let results = await prisma.categoria.findMany()
     return results
 }
+
 export const find = async(id) => {
     let results = await prisma.categoria.findUnique(
         {
@@ -16,6 +18,7 @@ export const find = async(id) => {
 export const create = async(nome) => {
     let results = await prisma.categoria.create(
         {
+
             data: {nome} 
         }
     )
@@ -40,3 +43,4 @@ let results = await prisma.categoria.update(
     )
     return results
 }
+
