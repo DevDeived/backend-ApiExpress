@@ -34,8 +34,9 @@ let results = await prisma.categoria.delete(
     return results
 }
 
-export const update = async(id) => {
-let results = await prisma.categoria.update(
+export const update = async(id,nome) => {
+    let results = await prisma.categoria.update(
+
         {
            where: {id:Number(id)},
            data: {nome}           

@@ -18,6 +18,5 @@ export const create = async(nome,email,senha,telefone) => {
 }
 
 export const update = async(id,nome) => {
-    return await categoriaRepository.update(nome,id)
-
+    return await categoriaRepository.update(id,nome)
 }
