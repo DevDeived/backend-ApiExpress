@@ -17,7 +17,6 @@ export const create = async(nome) => {
     return await categoriaRepository.create(nome)
 }
 
-export const update = async(id, nome) => {
-    return await categoriaRepository.update(id, nome)
-
+export const update = async(id,nome) => {
+    return await categoriaRepository.update(id,nome)
 }
