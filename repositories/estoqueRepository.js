@@ -1,12 +1,12 @@
 import prisma from "../config/prisma.js"
 
 export const index = async() => {
-    let results = await prisma.categoria.findMany()
+    let results = await prisma.estoque.findMany()
     return results
 }
 
 export const find = async(id) => {
-    let results = await prisma.categoria.findUnique(
+    let results = await prisma.estoque.findUnique(
         {
             where: {id:Number(id)}
         }
@@ -14,17 +14,17 @@ export const find = async(id) => {
     return results
 }
 
-export const create = async(nome) => {
-    let results = await prisma.categoria.create(
+export const create = async(produto_id, quantidade) => {
+    let results = await prisma.estoque.create(
         {
-            data: {nome}
+            data: {produto_id, quantidade}
         }
     )
     return results
 }
 
 export const destroy = async(id) => {
-    let results = await prisma.categoria.delete(
+    let results = await prisma.estoque.delete(
         {
             where: {id:Number(id)}
         }
@@ -32,11 +32,11 @@ export const destroy = async(id) => {
     return results
 }
 
-export const update = async(id,nome) => {
-    let results = await prisma.categoria.update(
+export const update = async(id, produto_id, quantidade) => {
+    let results = await prisma.estoque.update(
         {
             where: {id:Number(id)},
-            data: {nome}
+            data: {produto_id, quantidade}
         }
     )
     return results
