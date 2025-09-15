@@ -1,9 +1,10 @@
-import * as categoriaService from "../services/categoriaService.js"
+import * as usuariosService from "../services/usuariosService.js"
+
 
 export const index = async(req,res) => {
     try {
-        const categoria = await categoriaService.index()
-        res.status(200).send(categoria)
+        const usuarios = await usuariosService.index()
+        res.status(200).send(usuarios)
     } catch (error) {
             res.status(500).send(error)
     }
@@ -12,9 +13,9 @@ export const index = async(req,res) => {
 export const find = async(req,res) => {
     try {
         let {id} = req.params
-        const categoria = await categoriaService.find(id)
+        const usuarios = await usuariosService.find(id)
         
-        res.status(200).send(categoria)
+        res.status(200).send(usuarios)
     } catch (error) {
             res.status(500).send(error)
     }
@@ -23,17 +24,18 @@ export const find = async(req,res) => {
 export const destroy = async(req,res) => {
     try {
         let {id} = req.params
-        const categoria = await categoriaService.destroy(id)
+        const usuarios = await usuariosService.destroy(id)
         
-        res.status(200).send(categoria)
+        res.status(200).send(usuarios)
     } catch (error) {
             res.status(500).send(error)
     }
 }
 export const create = async(req,res) => {
     try {
-        let {nome} = req.body
-        const categoria = await categoriaService.create(nome)
+        let {nome,cpf,genero,email,celular,senha} = req.body
+        const usuarios = await usuariosService.create(nome,cpf,genero,email,celular,senha)
+        
         res.status(200).send("Usuário cadastrado com sucesso")
     } catch (error) {
             res.status(500).send(error)
@@ -42,10 +44,11 @@ export const create = async(req,res) => {
 
 export const update = async(req,res) => {
     try {
+        let {nome,cpf,genero,email,celular,senha} = req.body
         let {id} = req.params
-        let {nome} = req.body
-        const categoria = await categoriaService.update(id, nome)   
-        res.status(200).send("Categoria atualizada com sucesso")
+        const usuarios = await usuariosService.update(id,nome,cpf,genero,email,celular,senha)
+        
+        res.status(200).send("Usuário atualizado com sucesso")
     } catch (error) {
             res.status(500).send(error)
     }

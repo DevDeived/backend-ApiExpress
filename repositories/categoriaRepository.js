@@ -1,5 +1,6 @@
 import prisma from "../config/prisma.js"
 
+
 export const index = async() => {
     let results = await prisma.categoria.findMany()
     return results
@@ -11,7 +12,6 @@ export const find = async(id) => {
             where: {id:Number(id)}
         }
     )
-
     return results
 }
 
@@ -31,7 +31,6 @@ export const destroy = async(id) => {
             where: {id: Number(id)}
         }
     )
-
     return results
 }
 
@@ -49,3 +48,4 @@ export const update = async(id, nome) => {
 
     return results
 }
+
