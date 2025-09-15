@@ -4,7 +4,7 @@ const db = mysql.createPool({
     user:"root",
     host:"localhost",
     database:"dripstore",
-    password:"1234",
+    password:"2609",
     port:"3306"
 })
 

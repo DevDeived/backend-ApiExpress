@@ -10,6 +10,7 @@ datasource db {
 model Categoria {
   id          Int           @id @default(autoincrement())
   nome        String        @db.VarChar(255)
+  Produto     Produto[]
   createdAt   DateTime      @default(now())
   updatedAt   DateTime      @default(now())
 }
@@ -33,11 +34,11 @@ model Usuarios{
   createdAt   DateTime      @default(now())
   updatedAt   DateTime      @default(now())
   produtos  Produto[]
-
 }
 
 model Estado {
   id          Int           @id @default(autoincrement())
+  Produto     Produto[]
   nome        String        @db.VarChar(255)
   produtos  Produto[]
 }
@@ -45,19 +46,19 @@ model Estado {
 model Marca {
   id          Int           @id @default(autoincrement())
   nome        String        @db.VarChar(255)
+  Produto     Produto[]
   createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
-  produtos  Produto[]
+  updatedAt   DateTime      @default(now())
 }
 
 model Promocao {
   id          Int           @id @default(autoincrement())
   nome        String        @db.VarChar(255)
   inicio      DateTime      @default(now())
-  termino     DateTime      
+  termino     DateTime
+  Produto     Produto[]      
   createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
-  produtos  Produto[]
+  updatedAt   DateTime      @default(now())
 }
 
 model Produto {
@@ -79,7 +80,6 @@ model Produto {
   marca       Marca     @relation(fields: [marca_id], references: [id])
   promocao_id  Int
   promocao    Promocao  @relation(fields: [promocao_id], references: [id])
-  estoques     Estoque[]
 }
 
 model Estoque {

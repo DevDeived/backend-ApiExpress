@@ -18,28 +18,34 @@ export const find = async(id) => {
 export const create = async(nome) => {
     let results = await prisma.categoria.create(
         {
-            data: {nome}
+            data: {nome: nome}
         }
     )
+
     return results
 }
 
 export const destroy = async(id) => {
     let results = await prisma.categoria.delete(
         {
-            where: {id:Number(id)}
+            where: {id: Number(id)}
         }
     )
     return results
 }
 
-export const update = async(id,nome) => {
+export const update = async(id, nome) => {
     let results = await prisma.categoria.update(
         {
-            where: {id:Number(id)},
-            data: {nome}
+            where: {id: Number(id)},
+            data: { 
+                nome,
+                updatedAt: new Date(),
+                createdAt: new Date()
+            }
         }
     )
+
     return results
 }
 

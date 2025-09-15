@@ -1,6 +1,5 @@
 import * as categoriaService from "../services/categoriaService.js"
 
-
 export const index = async(req,res) => {
     try {
         const categoria = await categoriaService.index()
@@ -35,7 +34,7 @@ export const create = async(req,res) => {
     try {
         let {nome} = req.body
         const categoria = await categoriaService.create(nome)
-        res.status(200).send("Categoria cadastrada com sucesso")
+        res.status(200).send("Usuário cadastrado com sucesso")
     } catch (error) {
             res.status(500).send(error)
     }
@@ -43,10 +42,9 @@ export const create = async(req,res) => {
 
 export const update = async(req,res) => {
     try {
-        let {nome} = req.body
         let {id} = req.params
-        
-        const categoria = await categoriaService.update(id,nome)      
+        let {nome} = req.body
+        const categoria = await categoriaService.update(id, nome)   
         res.status(200).send("Categoria atualizada com sucesso")
     } catch (error) {
             res.status(500).send(error)
