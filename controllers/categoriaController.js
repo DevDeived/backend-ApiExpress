@@ -42,10 +42,11 @@ export const create = async(req,res) => {
 
 export const update = async(req,res) => {
     try {
-        let {id} = req.params
         let {nome} = req.body
-        const categoria = await categoriaService.update(id, nome)   
-        res.status(200).send("Categoria atualizada com sucesso")
+        let {id} = req.params
+        const categoria = await categoriaService.update(id,nome)
+        res.status(200).send("Usuário atualizado com sucesso")
+
     } catch (error) {
             res.status(500).send(error)
     }
