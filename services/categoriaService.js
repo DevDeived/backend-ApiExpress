@@ -13,7 +13,7 @@ export const destroy = async(id) => {
     return await categoriaRepository.destroy(id)
 }
 
-export const create = async(nome) => {
+export const create = async(nome,email,senha,telefone) => {
     return await categoriaRepository.create(nome)
 }
 

@@ -1,13 +1,11 @@
 import prisma from "../config/prisma.js"
 
-
 export const index = async() => {
-    let results = await prisma.categoria.findMany()
+    let results = await prisma.forma_de_pagamento.findMany()
     return results
 }
-
 export const find = async(id) => {
-    let results = await prisma.categoria.findUnique(
+    let results = await prisma.forma_de_pagamento.findUnique(
         {
             where:{id:Number(id)}
         }
@@ -16,9 +14,8 @@ export const find = async(id) => {
 }
 
 export const create = async(nome) => {
-    let results = await prisma.categoria.create(
+    let results = await prisma.forma_de_pagamento.create(
         {
-
             data: {nome} 
         }
     )
@@ -26,7 +23,7 @@ export const create = async(nome) => {
 }
 
 export const destroy = async(id) => {
-let results = await prisma.categoria.delete(
+let results = await prisma.forma_de_pagamento.delete(
         {
            where: {id:Number(id)}
         }
@@ -34,14 +31,10 @@ let results = await prisma.categoria.delete(
     return results
 }
 
-export const update = async(id,nome) => {
-    let results = await prisma.categoria.update(
-
-        {
-           where: {id:Number(id)},
-           data: {nome}           
-        }
-    )
+export const update = async(id, nome) => {
+    let results = await prisma.forma_de_pagamento.update({
+        where: { id: Number(id) },
+        data: { nome }
+    })
     return results
 }
-
