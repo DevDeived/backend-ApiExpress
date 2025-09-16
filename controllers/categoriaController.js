@@ -5,7 +5,7 @@ export const index = async(req,res) => {
         const categoria = await categoriaService.index()
         res.status(200).send(categoria)
     } catch (error) {
-            res.status(500).send(error)
+        res.status(500).send(error)
     }
 }
 
