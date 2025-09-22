@@ -96,11 +96,11 @@ export const update = async (req, res) => {
       promocao_id
     );
 
-    res.status(200).json("Produto atualizado com sucesso");
+    res.status(200).send("Produto atualizado com sucesso");
   } catch (error) {
-    console.error(error); // log no terminal
+    console.error(error); 
     res
       .status(500)
-      .json({ error: "Erro ao atualizar produto", details: error.message });
+      .send({ error: "Erro ao atualizar produto", details: error.message });
   }
 };
