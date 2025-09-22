@@ -36,10 +36,7 @@ export const create = async (req, res) => {
         const { nome } = req.body;
         const formadePagamento = await formadePagamentoService.create(nome);
 
-        res.status(201).send({
-            mensagem: "Forma de pagamento cadastrada com sucesso",
-            data: formadePagamento
-        });
+        res.status(201).send("Forma de pagamento cadastrada com sucesso");
     } catch (error) {
         res.status(500).send({
             mensagem: "Erro ao cadastrar forma de pagamento",
@@ -55,7 +52,7 @@ export const update = async(req,res) => {
         let {id} = req.params
         const formadePagamento = await formadePagamentoService.update(id,nome,)
         
-        res.status(200).send("Usuário atualizado com sucesso")
+        res.status(200).send("Forma de pagamento atualizado com sucesso")
     } catch (error) {
             res.status(500).send(error)
     }
