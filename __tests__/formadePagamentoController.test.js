@@ -80,6 +80,5 @@ describe("Testes unitários de forma de Pagamento", () => {
         expect(formadePagamentoService.update).toHaveBeenCalled()
         expect(res.status).toHaveBeenCalledWith(200)
         expect(res.send).toHaveBeenCalledWith("Forma de pagamento atualizado com sucesso")
-
     })
 })
