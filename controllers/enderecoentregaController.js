@@ -44,7 +44,7 @@ export const create = async(req,res) => {
 
 export const update = async(req,res) => {
     try {
-        let {estado} = req.body
+        let {estado,cidade,rua,cep,numero,complemento} = req.body
         let {id} = req.params
         const enderecoentrega = await enderecoentregaService.update(id,estado,cidade,rua,cep,numero,complemento)
         

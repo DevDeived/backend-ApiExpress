@@ -4,7 +4,7 @@ import * as categoriaService from "../services/categoriaService.js"
 
 jest.mock("../services/categoriaService.js")
 
-describe("Testes unitários de categoria", () => {
+describe("Testes unitários de endereços", () => {
     let req, res;
 
     beforeAll(() => {
