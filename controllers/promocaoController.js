@@ -6,7 +6,7 @@ export const index = async(req,res) => {
         const promocao = await promocaoService.index()
         res.status(200).send(promocao)
     } catch (error) {
-            res.status(500).json({error: "Erro interno ao listar promoções"})
+            res.status(500).send({error: "Erro interno ao listar promoções"})
     }
 }
 
@@ -16,11 +16,11 @@ export const find = async(req,res) => {
         const promocao = await promocaoService.find(id)
         
         if (!promocao) {
-            return res.status(404).json({error: "Promoção não encontrada."})
+            return res.status(404).send({error: "Promoção não encontrada."})
         }
-        res.status(200).json(promocao)
+        res.status(200).send(promocao)
     } catch (error) {
-            res.status(500).json({error: "Erro interno ao buscar promoções"})
+            res.status(500).send({error: "Erro interno ao buscar promoções"})
     }
 }
 
@@ -40,10 +40,10 @@ export const create = async(req,res) => {
 
         const promocao = await promocaoService.create(nome, inicio, termino)
         
-        res.status(201).json(promocao)
+        res.status(201).send("Promoção criada com sucesso")
     } catch (error) {
             console.error("Erro ao criar promoção", error)
-            res.status(500).json({error: "Erro interno ao criar promoção"})
+            res.status(500).send({error: "Erro interno ao criar promoção"})
     }
 }
 
