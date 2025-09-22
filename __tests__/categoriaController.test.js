@@ -58,30 +58,28 @@ describe("Testes unitários de categoria", () => {
 
     it("deve criar uma categoria ", async () => {
         req.params.body = "Corrida"
-        let categoria = [{ id: 1, nome: "esportes" }]
 
-        categoriaService.create.mockResolvedValue(categoria)
+        categoriaService.create.mockResolvedValue(req.params.body)
 
         await categoriaController.create(req, res)
 
         expect(categoriaService.create).toHaveBeenCalled()
         expect(res.status).toHaveBeenCalledWith(200)
-        expect(res.send).toHaveBeenCalledWith(categoria)
+        expect(res.send).toHaveBeenCalledWith("Categoria cadastrada com sucesso")
 
     })
 
         it("deve atualizar uma categoria ", async () => {
         req.params.body = "Corrida"
         req.params.id = 1
-        let categoria = [{ id: 1, nome: "esportes" }]
 
-        categoriaService.update.mockResolvedValue(categoria)
+        categoriaService.update.mockResolvedValue(req.params.id,req.params.body)
 
         await categoriaController.update(req, res)
 
         expect(categoriaService.update).toHaveBeenCalled()
         expect(res.status).toHaveBeenCalledWith(200)
-        expect(res.send).toHaveBeenCalledWith(categoria)
+        expect(res.send).toHaveBeenCalledWith("Categoria atualizada com sucesso")
 
     })
 })

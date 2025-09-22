@@ -1,6 +1,5 @@
 import * as enderecoentregaService from "../services/enderecoentregaService.js"
 
-
 export const index = async(req,res) => {
     try {
         const enderecoentrega = await enderecoentregaService.index()
