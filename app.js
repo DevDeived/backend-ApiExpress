@@ -48,23 +48,8 @@ app.use("/api", transportadoraRoute);
 app.use("/api", estoqueRoute);
 app.use("/api", usuariosRoute);
 
-// ✅ Rota teste (pode remover depois)
-app.get("/api/produto", (req, res) => {
-  res.json([
-    {
-      id: 1,
-      description: "Produto Teste",
-      image: "",
-      style: "",
-      discount: 0,
-      department: "",
-      fullPrice: 100,
-      discountedPrice: 90,
-    },
-  ]);
-});
 
-// Servidor
+
 app.listen(PORT, () => {
   console.log(`🚀 Aplicação rodando na porta ${PORT}`);
 });
