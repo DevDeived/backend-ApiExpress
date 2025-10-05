@@ -111,6 +111,7 @@ CREATE TABLE `Produto` (
     `cor` VARCHAR(20) NOT NULL,
     `preco` DECIMAL(10, 2) NOT NULL,
     `genero` VARCHAR(2) NOT NULL,
+    `imagem` VARCHAR(255) NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
     `categoria_id` INTEGER NOT NULL,

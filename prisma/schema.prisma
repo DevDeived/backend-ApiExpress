@@ -106,6 +106,7 @@ model Produto {
   cor                   String             @db.VarChar(20)
   preco                 Decimal            @db.Decimal(10,2)
   genero                String             @db.VarChar(2)
+  imagem                String             @db.VarChar(255)
   createdAt             DateTime           @default(now())
   updatedAt             DateTime           @updatedAt
   categoria_id          Int

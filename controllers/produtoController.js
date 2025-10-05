@@ -1,6 +1,5 @@
 import * as produtoService from "../services/produtoService.js";
 
-
 export const index = async (req, res) => {
   try {
     const produtos = await produtoService.getFiltered({
@@ -9,7 +8,6 @@ export const index = async (req, res) => {
       page: Number(req.query.page) || 1,
       limit: Number(req.query.limit) || 12,
     });
-
     res.status(200).json(produtos);
   } catch (error) {
     console.error("Erro no getFiltered:", error);
