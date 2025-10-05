@@ -14,6 +14,15 @@ export const find = async(id) => {
     return results
 }
 
+export const findByEmail = async(email) => {
+    let results = await prisma.usuarios.findUnique(
+        {
+            where: {email:email}
+        }
+    )
+    return results
+}
+
 export const create = async(nome,cpf,genero,email,celular,senha) => {
     let results = await prisma.usuarios.create(
         {

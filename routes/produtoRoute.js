@@ -1,7 +1,7 @@
 import express from "express"
 import * as produtoController from "../controllers/produtoController.js"
+const router = express.Router();
 
-const router = express.Router()
 
 router.get("/produto",produtoController.index)
 router.get("/produto/:id",produtoController.find)
