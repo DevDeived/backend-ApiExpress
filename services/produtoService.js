@@ -1,7 +1,6 @@
 import * as produtoRepository from "../repositories/produtoRepository.js";
 import prisma from "../config/prisma.js";
 
-// Filtrar produtos
 export const getFiltered = async ({
   filtros = {},
   sort = "lancamento",
@@ -10,7 +9,6 @@ export const getFiltered = async ({
 }) => {
   const where = {};
 
-  // Filtrar por marca
   if (filtros.marca_id) {
     const marcas = Array.isArray(filtros.marca_id)
       ? filtros.marca_id.map(Number)
@@ -18,7 +16,6 @@ export const getFiltered = async ({
     where.marca_id = { in: marcas };
   }
 
-  // Filtrar por categoria
   if (filtros.categoria_id) {
     const categorias = Array.isArray(filtros.categoria_id)
       ? filtros.categoria_id.map(Number)
@@ -26,7 +23,6 @@ export const getFiltered = async ({
     where.categoria_id = { in: categorias };
   }
 
-  // Filtrar por gênero
   if (filtros.genero) {
     const generos = Array.isArray(filtros.genero)
       ? filtros.genero
@@ -34,13 +30,11 @@ export const getFiltered = async ({
     where.genero = { in: generos };
   }
 
-  // Filtrar por faixa de preço
   if (filtros.preco) {
     const [min, max] = filtros.preco.split("-").map(Number);
     where.preco = { gte: min, lte: max };
   }
 
-  // Ordenação
   let orderBy = { createdAt: "desc" };
   switch (sort) {
     case "preco_asc":
@@ -87,71 +81,107 @@ export const getFiltered = async ({
 };
 
 export const create = async (data, imageFile) => {
+  Object.keys(data).forEach((key) => {
+    if (data[key] === undefined || data[key] === null || data[key] === "") {
+      delete data[key];
+    }
+  });
+
+  const createData = {
+    nome: data.nome,
+    descricao: data.descricao,
+    avaliacao: data.avaliacao ? Number(data.avaliacao) : undefined,
+    tamanho: data.tamanho,
+    cor: data.cor,
+    preco: data.preco ? Number(data.preco) : undefined,
+    genero: data.genero,
+    imagem: imageFile ? imageFile.filename : data.imagem,
+  };
+
+  if (data.categoria_id) {
+    createData.categoria = { connect: { id: Number(data.categoria_id) } };
+  }
+  if (data.marca_id) {
+    createData.marca = { connect: { id: Number(data.marca_id) } };
+  }
+  if (data.promocao_id) {
+    createData.promocao = { connect: { id: Number(data.promocao_id) } };
+  }
+  if (data.estado_id) {
+    createData.estado = { connect: { id: Number(data.estado_id) } };
+  }
+  if (data.estoque_id) {
+    createData.estoque = { connect: { id: Number(data.estoque_id) } };
+  }
+  if (data.forma_de_pagamento_id) {
+    createData.forma_de_pagamento = {
+      connect: { id: Number(data.forma_de_pagamento_id) },
+    };
+  }
+  if (data.end_de_entrega_id) {
+    createData.end_de_entrega = {
+      connect: { id: Number(data.end_de_entrega_id) },
+    };
+  }
+
   return await prisma.produto.create({
-    data: {
-      nome: data.nome,
-      descricao: data.descricao,
-      avaliacao: Number(data.avaliacao),
-      tamanho: data.tamanho,
-      cor: data.cor,
-      preco: Number(data.preco),
-      genero: data.genero,
-      imagem: data.imagem,
-      categoria: { connect: { id: Number(data.categoria_id) } },
-      marca: { connect: { id: Number(data.marca_id) } },
-      promocao: data.promocao_id
-        ? { connect: { id: Number(data.promocao_id) } }
-        : undefined,
-      estado: data.estado_id
-        ? { connect: { id: Number(data.estado_id) } }
-        : undefined,
-      estoque: data.estoque_id
-        ? { connect: { id: Number(data.estoque_id) } }
-        : undefined,
-      forma_de_pagamento: data.forma_de_pagamento_id
-        ? { connect: { id: Number(data.forma_de_pagamento_id) } }
-        : undefined,
-      end_de_entrega: data.end_de_entrega_id
-        ? { connect: { id: Number(data.end_de_entrega_id) } }
-        : undefined,
+    data: createData,
+    include: {
+      categoria: true,
+      marca: true,
+      promocao: true,
+      estoque: true,
+      forma_de_pagamento: true,
+      end_de_entrega: true,
+      estado: true,
     },
   });
 };
 
 export const update = async (id, data, imageFile) => {
+  Object.keys(data).forEach((key) => {
+    if (data[key] === undefined) delete data[key];
+  });
+
+  const updateData = {
+    nome: data.nome,
+    descricao: data.descricao,
+    avaliacao: data.avaliacao ? Number(data.avaliacao) : undefined,
+    tamanho: data.tamanho,
+    cor: data.cor,
+    preco: data.preco ? Number(data.preco) : undefined,
+    genero: data.genero,
+    imagem: data.imagem || (imageFile ? imageFile.filename : undefined),
+    categoria: data.categoria_id
+      ? { connect: { id: Number(data.categoria_id) } }
+      : undefined,
+    marca: data.marca_id
+      ? { connect: { id: Number(data.marca_id) } }
+      : undefined,
+    promocao: data.promocao_id
+      ? { connect: { id: Number(data.promocao_id) } }
+      : undefined,
+    estado: data.estado_id
+      ? { connect: { id: Number(data.estado_id) } }
+      : undefined,
+    estoque: data.estoque_id
+      ? { connect: { id: Number(data.estoque_id) } }
+      : undefined,
+    forma_de_pagamento: data.forma_de_pagamento_id
+      ? { connect: { id: Number(data.forma_de_pagamento_id) } }
+      : undefined,
+    end_de_entrega: data.end_de_entrega_id
+      ? { connect: { id: Number(data.end_de_entrega_id) } }
+      : undefined,
+  };
+
+  Object.keys(updateData).forEach((key) => {
+    if (updateData[key] === undefined) delete updateData[key];
+  });
+
   return await prisma.produto.update({
     where: { id: Number(id) },
-    data: {
-      nome: data.nome,
-      descricao: data.descricao,
-      avaliacao: Number(data.avaliacao),
-      tamanho: data.tamanho,
-      cor: data.cor,
-      preco: Number(data.preco),
-      genero: data.genero,
-      imagem: data.imagem,
-      categoria: data.categoria_id
-        ? { connect: { id: Number(data.categoria_id) } }
-        : undefined,
-      marca: data.marca_id
-        ? { connect: { id: Number(data.marca_id) } }
-        : undefined,
-      promocao: data.promocao_id
-        ? { connect: { id: Number(data.promocao_id) } }
-        : undefined,
-      estado: data.estado_id
-        ? { connect: { id: Number(data.estado_id) } }
-        : undefined,
-      estoque: data.estoque_id
-        ? { connect: { id: Number(data.estoque_id) } }
-        : undefined,
-      forma_de_pagamento: data.forma_de_pagamento_id
-        ? { connect: { id: Number(data.forma_de_pagamento_id) } }
-        : undefined,
-      end_de_entrega: data.end_de_entrega_id
-        ? { connect: { id: Number(data.end_de_entrega_id) } }
-        : undefined,
-    },
+    data: updateData,
   });
 };
 
